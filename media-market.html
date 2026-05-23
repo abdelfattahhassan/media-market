@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Market | شريكك في التسويق الرقمي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #0e5c6e;
+  --teal-dark: #083d4a;
+  --teal-light: #1a7a90;
+  --orange: #f47320;
+  --orange-light: #ff8c3a;
+  --white: #ffffff;
+  --off-white: #e8f4f8;
+  --text-muted: #8ab4bf;
+  --bg-dark: #061e25;
+  --bg-card: rgba(14, 92, 110, 0.15);
+  --border: rgba(244, 115, 32, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-dark);
+  color: var(--white);
+  font-family: 'Cairo', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--orange);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--orange);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+/* Animated background */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(14,92,110,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,92,110,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: fixed;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(14,92,110,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  top: -200px; right: -200px;
+  animation: glowMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100px, 150px); }
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(20px);
+  background: rgba(6, 30, 37, 0.85);
+  border-bottom: 1px solid rgba(244,115,32,0.1);
+  transition: all 0.3s;
+}
+
+.nav-logo {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+.nav-logo span { color: var(--orange); }
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; right: 0;
+  width: 0; height: 2px;
+  background: var(--orange);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--orange);
+  color: #fff !important;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem !important;
+  text-decoration: none;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--orange-light) !important; transform: translateY(-1px); }
+.nav-cta::after { display: none !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 60px 80px;
+  position: relative; z-index: 1;
+  overflow: hidden;
+}
+
+.hero-content { max-width: 620px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(244,115,32,0.12);
+  border: 1px solid rgba(244,115,32,0.3);
+  color: var(--orange);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  animation: fadeInDown 0.6s ease both;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+h1.hero-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  animation: fadeInDown 0.7s 0.1s ease both;
+}
+
+h1.hero-title .highlight {
+  color: var(--orange);
+  position: relative;
+  display: inline-block;
+}
+
+h1.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 6px;
+  background: rgba(244,115,32,0.25);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+.hero-sub {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.7s 0.2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeInDown 0.7s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  transition: all 0.25s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(244,115,32,0.3); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.25s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+.hero-visual {
+  position: absolute;
+  left: 0; top: 50%; transform: translateY(-50%);
+  width: 50%;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+
+.hero-orb {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle at 40% 40%, rgba(14,92,110,0.6), rgba(6,30,37,0.1));
+  border-radius: 50%;
+  border: 1px solid rgba(14,92,110,0.3);
+  position: relative;
+  animation: orbPulse 4s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.hero-orb::before {
+  content: '';
+  position: absolute; inset: 20px;
+  border-radius: 50%;
+  border: 1px dashed rgba(244,115,32,0.3);
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-stats {
+  display: flex; gap: 40px;
+  margin-top: 48px;
+  animation: fadeInDown 0.7s 0.4s ease both;
+}
+
+.stat-item { text-align: right; }
+.stat-num {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 2rem; font-weight: 900;
+  color: var(--orange);
+  line-height: 1;
+}
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+/* SECTION BASE */
+section { position: relative; z-index: 1; padding: 100px 60px; }
+
+.section-label {
+  display: inline-block;
+  color: var(--orange);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px; margin: 0 auto;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-card-main {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid rgba(244,115,32,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card-main::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 200px; height: 200px;
+  background: rgba(244,115,32,0.08);
+  border-radius: 50%;
+}
+
+.about-card-main .big-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.about-card-main h3 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.about-card-main p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; }
+
+.about-float {
+  position: absolute;
+  bottom: -20px; left: -20px;
+  background: var(--orange);
+  border-radius: 16px;
+  padding: 20px 28px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(244,115,32,0.3);
+}
+.about-float strong {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 2rem; font-weight: 900;
+  display: block;
+}
+.about-float span { font-size: 0.8rem; opacity: 0.85; }
+
+.values-list { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+
+.value-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.25s;
+}
+.value-item:hover { border-color: rgba(244,115,32,0.4); transform: translateX(-4px); }
+
+.value-icon {
+  width: 44px; height: 44px;
+  background: rgba(244,115,32,0.12);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.value-text strong { display: block; font-weight: 700; margin-bottom: 4px; }
+.value-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+/* SERVICES */
+.services-section { background: rgba(14,92,110,0.06); }
+
+.services-header { text-align: center; margin-bottom: 60px; }
+.services-header .section-desc { margin: 0 auto; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px; margin: 0 auto;
+}
+
+.service-card {
+  background: rgba(14,92,110,0.12);
+  border: 1px solid rgba(14,92,110,0.3);
+  border-radius: 20px;
+  padding: 36px 28px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(244,115,32,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.service-card:hover {
+  border-color: rgba(244,115,32,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(6,30,37,0.5);
+}
+.service-card:hover::after { opacity: 1; }
+
+.service-icon {
+  width: 60px; height: 60px;
+  background: rgba(244,115,32,0.12);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  transition: all 0.3s;
+}
+.service-card:hover .service-icon { background: var(--orange); }
+
+.service-card h3 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.2rem; font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.service-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+/* WHY US */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px; margin: 60px auto 0;
+}
+
+.why-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: all 0.25s;
+}
+.why-item:hover { border-color: rgba(244,115,32,0.5); transform: translateY(-3px); }
+
+.why-num {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: rgba(244,115,32,0.2);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.why-content h4 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--orange);
+}
+.why-content p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; }
+
+/* PRICING */
+.pricing-section { background: rgba(14,92,110,0.04); }
+
+.pricing-header { text-align: center; margin-bottom: 60px; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px; margin: 0 auto;
+  align-items: start;
+}
+
+.price-card {
+  background: rgba(14,92,110,0.1);
+  border: 1px solid rgba(14,92,110,0.3);
+  border-radius: 24px;
+  padding: 40px 32px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.price-card:hover { transform: translateY(-6px); }
+
+.price-card.featured {
+  background: linear-gradient(160deg, rgba(14,92,110,0.4), rgba(8,61,74,0.6));
+  border-color: var(--orange);
+  box-shadow: 0 0 60px rgba(244,115,32,0.15);
+  transform: scale(1.03);
+}
+
+.price-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+
+.featured-badge {
+  position: absolute;
+  top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 18px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.price-plan {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.price-name {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.6rem; font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.price-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+
+.price-amount {
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 28px;
+}
+.price-amount .amount {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 3rem; font-weight: 900;
+  color: var(--orange);
+  line-height: 1;
+}
+.price-amount .currency { font-size: 1rem; color: var(--text-muted); }
+.price-amount .period { font-size: 0.85rem; color: var(--text-muted); }
+
+.price-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+
+.price-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.88rem; color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+}
+
+.price-features li::before {
+  content: '✓';
+  color: var(--orange);
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.price-cta {
+  display: block; width: 100%; text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none; cursor: pointer;
+  border: none; transition: all 0.25s;
+}
+
+.price-cta.outline {
+  background: transparent;
+  border: 1.5px solid rgba(244,115,32,0.3);
+  color: var(--white);
+}
+.price-cta.outline:hover { border-color: var(--orange); color: var(--orange); }
+
+.price-cta.filled {
+  background: var(--orange);
+  color: #fff;
+}
+.price-cta.filled:hover { background: var(--orange-light); box-shadow: 0 8px 24px rgba(244,115,32,0.35); }
+
+/* EXTRAS */
+.extras-section { max-width: 1100px; margin: 0 auto; padding: 0 0 100px; }
+.extras-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.8rem; font-weight: 900;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.extra-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.2s;
+}
+.extra-item:hover { border-color: rgba(244,115,32,0.4); }
+.extra-item span { font-size: 0.9rem; }
+.extra-item strong { color: var(--orange); font-weight: 700; white-space: nowrap; }
+
+/* TERMS */
+.terms-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 900px; margin: 60px auto 0;
+}
+
+.term-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+}
+
+.term-card h4 {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.15rem; font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+
+.term-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; }
+
+.term-notes { max-width: 900px; margin: 24px auto 0; }
+.term-notes ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.term-notes li {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.87rem; color: var(--text-muted);
+}
+.term-notes li::before { content: '★'; color: var(--orange); flex-shrink: 0; }
+
+/* CONTACT */
+.contact-section {
+  background: linear-gradient(135deg, rgba(14,92,110,0.25), rgba(6,30,37,0.8));
+  border-top: 1px solid rgba(244,115,32,0.1);
+}
+
+.contact-inner {
+  max-width: 900px; margin: 0 auto;
+  text-align: center;
+}
+
+.contact-inner .section-title { margin-bottom: 12px; }
+.contact-inner .section-desc { margin: 0 auto 48px; text-align: center; }
+
+.contact-cards {
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.contact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 36px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  min-width: 220px;
+  transition: all 0.25s;
+}
+.contact-card:hover { border-color: rgba(244,115,32,0.5); transform: translateY(-4px); }
+
+.contact-card .icon {
+  width: 52px; height: 52px;
+  background: rgba(244,115,32,0.12);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+
+.contact-card strong { font-size: 0.8rem; color: var(--text-muted); }
+.contact-card a, .contact-card span {
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.95rem;
+  direction: ltr;
+}
+.contact-card a:hover { color: var(--orange); }
+
+.contact-cta-wrap {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+
+/* FOOTER */
+footer {
+  background: rgba(6,30,37,0.95);
+  border-top: 1px solid rgba(14,92,110,0.3);
+  padding: 32px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  position: relative; z-index: 1;
+}
+
+.footer-logo {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 900; font-size: 1.3rem;
+}
+.footer-logo span { color: var(--orange); }
+
+footer p { font-size: 0.82rem; color: var(--text-muted); }
+
+/* ANIMATIONS */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DIVIDER */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244,115,32,0.2), transparent);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-visual { display: none; }
+  section { padding: 70px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-card.featured { transform: none; }
+  .why-grid { grid-template-columns: 1fr; }
+  .terms-grid { grid-template-columns: 1fr; }
+  footer { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">MEDIA <span>MARKET</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#why">لماذا نحن</a></li>
+    <li><a href="#pricing">الباقات</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">ابدأ الآن</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">شريكك في التسويق الرقمي</div>
+    <h1 class="hero-title">
+      نُحوّل علامتك<br>
+      التجارية إلى<br>
+      <span class="highlight">قوة رقمية</span>
+    </h1>
+    <p class="hero-sub">
+      نقدم حلولاً تسويقية متكاملة تساعدك على النمو والتميز في السوق الرقمي. نجمع بين الإبداع والاستراتيجية لنحقق نتائج ملموسة لعملائنا.
+    </p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">استعرض الباقات ←</a>
+      <a href="#services" class="btn-outline">خدماتنا</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">خدمات أساسية</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">باقات متكاملة</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">AI</div>
+        <div class="stat-label">تقنيات متقدمة</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-orb"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-card-main">
+        <span class="big-icon">🚀</span>
+        <h3>رحلتنا نحو التميز</h3>
+        <p>
+          Media Market هي وكالة تسويق رقمي رائدة تأسست برؤية طموحة لتمكين الشركات من النمو والتميز في العالم الرقمي. بدأت رحلتنا بشغف حقيقي لمساعدة العلامات التجارية على بناء حضور قوي ومؤثر.
+        </p>
+      </div>
+      <div class="about-float">
+        <strong>100%</strong>
+        <span>التزام بالجودة</span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="section-label">من نحن</span>
+      <h2 class="section-title">مهمتنا وقيمنا</h2>
+      <p class="section-desc">نؤمن بأن الإبداع والاستراتيجية هما أساس أي نجاح تسويقي حقيقي.</p>
+
+      <div class="values-list">
+        <div class="value-item">
+          <div class="value-icon">💡</div>
+          <div class="value-text">
+            <strong>أفكار مبتكرة وقوية</strong>
+            <p>الأفكار التسويقية المبتكرة هي أساس نجاح أي علامة تجارية. نقدم حلولاً إبداعية تميزك عن المنافسين.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">📈</div>
+          <div class="value-text">
+            <strong>تعزيز نمو العملاء</strong>
+            <p>نعمل على تعزيز نمو عملائنا من خلال حلول تسويقية متطورة تواكب أحدث التوجهات الرقمية.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <div class="value-text">
+            <strong>الاحترافية في التنفيذ</strong>
+            <p>نحترم المواعيد ونلتزم بالاحترافية في كل مرحلة. الجودة والدقة هما أساس عملنا.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="services-header reveal">
+    <span class="section-label">ما نقدمه</span>
+    <h2 class="section-title">خدماتنا الأساسية</h2>
+    <p class="section-desc">باقة متكاملة من الخدمات التسويقية الاحترافية لتعزيز حضورك الرقمي وتحقيق أهدافك التجارية.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">📱</div>
+      <h3>إدارة السوشيال ميديا</h3>
+      <p>إدارة شاملة لحساباتك على جميع المنصات، جدولة المحتوى، التفاعل مع الجمهور، وتحليل الأداء بشكل دوري.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📣</div>
+      <h3>الإعلانات المدفوعة</h3>
+      <p>حملات إعلانية مستهدفة على فيسبوك، إنستغرام، جوجل وتيك توك لتحقيق أعلى عائد على الاستثمار.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3>تصميم الهوية البصرية</h3>
+      <p>تصميم شعارات احترافية، هوية بصرية متكاملة، وقوالب تصميم متناسقة تعكس علامتك التجارية بقوة.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎬</div>
+      <h3>إنتاج المحتوى</h3>
+      <p>إنتاج محتوى إبداعي متنوع: تصوير فوتوغرافي، فيديو احترافي، موشن جرافيك، وكتابة محتوى تسويقي جذاب.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WHY -->
+<section id="why">
+  <div style="text-align:center" class="reveal">
+    <span class="section-label">مميزاتنا</span>
+    <h2 class="section-title">لماذا Media Market؟</h2>
+    <p class="section-desc" style="margin:0 auto">نختلف عن غيرنا بأربعة محاور أساسية تجعلنا الخيار الأمثل لنمو علامتك التجارية.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-item reveal">
+      <div class="why-num">01</div>
+      <div class="why-content">
+        <h4>هوية بصرية فاخرة</h4>
+        <p>نصمم لك حضوراً رقمياً يليق بطموحاتك، هوية بصرية فاخرة تعكس نمو علامتك وتميزها في السوق.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-num">02</div>
+      <div class="why-content">
+        <h4>تقنيات AI متقدمة</h4>
+        <p>نستخدم أحدث تقنيات الذكاء الاصطناعي في إنتاج الفيديوهات والـ Reels لتحقيق أقصى تأثير ممكن.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-num">03</div>
+      <div class="why-content">
+        <h4>فريق عمل متميز</h4>
+        <p>فريق عمل شبابي ذو خبرة وإبداع متجدد يواكب أحدث اتجاهات التسويق الرقمي ويحقق نتائج حقيقية.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-num">04</div>
+      <div class="why-content">
+        <h4>التزام صارم بالمواعيد</h4>
+        <p>نضمن تسليم مشاريعك في الوقت المحدد دون المساس بالجودة. الالتزام والدقة من أولوياتنا الأولى.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-section">
+  <div class="pricing-header reveal">
+    <span class="section-label">الأسعار</span>
+    <h2 class="section-title">اختر الباقة المناسبة لك</h2>
+    <p class="section-desc" style="margin:0 auto">ثلاث باقات مصممة لتناسب كل مرحلة من مراحل نمو مشروعك.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- START -->
+    <div class="price-card reveal">
+      <div class="price-plan">للمشاريع الناشئة</div>
+      <div class="price-name">START</div>
+      <div class="price-desc">للبدايات القوية — انطلق بثقة نحو النجاح الرقمي</div>
+      <div class="price-amount">
+        <span class="amount">2,000</span>
+        <span class="currency">جنيه</span>
+        <span class="period">/ شهر</span>
+      </div>
+      <ul class="price-features">
+        <li>إدارة صفحة Facebook كاملة</li>
+        <li>12 تصميم احترافي شهرياً</li>
+        <li>كتابة محتوى تسويقي جذاب</li>
+        <li>تصميم Cover احترافي</li>
+        <li>8 Stories شهرياً</li>
+        <li>خطة محتوى شهرية منظمة</li>
+        <li>دعم فني عبر واتساب</li>
+      </ul>
+      <a href="#contact" class="price-cta outline">ابدأ الآن</a>
+    </div>
+
+    <!-- GROWTH -->
+    <div class="price-card featured reveal">
+      <div class="featured-badge">⭐ الأكثر طلباً</div>
+      <div class="price-plan">للتوسع والنمو</div>
+      <div class="price-name">GROWTH</div>
+      <div class="price-desc">حلول متكاملة لتعزيز حضورك الرقمي في مرحلة التوسع</div>
+      <div class="price-amount">
+        <span class="amount">4,500</span>
+        <span class="currency">جنيه</span>
+        <span class="period">/ شهر</span>
+      </div>
+      <ul class="price-features">
+        <li>إدارة كاملة للصفحة</li>
+        <li>16 تصميم احترافي</li>
+        <li>كتابة محتوى تسويقي احترافي</li>
+        <li>12 Story شهرياً</li>
+        <li>8 فيديوهات قصيرة لزيادة التفاعل</li>
+        <li>مونتاج سريع وجذاب</li>
+        <li>AI Video Enhancements</li>
+        <li>إدارة الحملات الإعلانية</li>
+        <li>استهداف احترافي</li>
+        <li>تقرير أداء شهري</li>
+        <li>تقارير أسبوعية + اجتماع شهري</li>
+      </ul>
+      <a href="#contact" class="price-cta filled">ابدأ الآن</a>
+    </div>
+
+    <!-- DOMINATE -->
+    <div class="price-card reveal">
+      <div class="price-plan">للسيطرة الكاملة</div>
+      <div class="price-name">DOMINATE</div>
+      <div class="price-desc">الحل المتكامل للعلامات التجارية الطموحة</div>
+      <div class="price-amount">
+        <span class="amount">12,000</span>
+        <span class="currency">جنيه</span>
+        <span class="period">/ شهر</span>
+      </div>
+      <ul class="price-features">
+        <li>إدارة كاملة احترافية للصفحة</li>
+        <li>22 تصميم احترافي شهرياً</li>
+        <li>كتابة محتوى متقدمة</li>
+        <li>Brand Direction كامل</li>
+        <li>تصوير احترافي للمنتجات</li>
+        <li>Reels سينمائية وفيديوهات AI</li>
+        <li>Motion Graphics احترافي</li>
+        <li>إدارة إعلانات مع Retargeting</li>
+        <li>تحسين التحويلات والأداء</li>
+        <li>تطوير الهوية البصرية</li>
+        <li>استراتيجية تسويق كاملة</li>
+        <li>مدير حساب مخصص 24/7</li>
+        <li>اجتماعات استراتيجية أسبوعية</li>
+      </ul>
+      <a href="#contact" class="price-cta outline">ابدأ الآن</a>
+    </div>
+  </div>
+
+  <!-- EXTRAS -->
+  <div class="extras-section reveal">
+    <h3 class="extras-title" style="margin-top:60px">الخدمات الإضافية</h3>
+    <div class="extras-grid">
+      <div class="extra-item"><span>تصميم شعار (Logo)</span><strong>500 ج</strong></div>
+      <div class="extra-item"><span>تصوير منتجات</span><strong>حسب الاتفاق</strong></div>
+      <div class="extra-item"><span>فيديوهات AI</span><strong>من 500 ج</strong></div>
+      <div class="extra-item"><span>موشن جرافيك</span><strong>من 1,000 ج</strong></div>
+      <div class="extra-item"><span>Branding كامل</span><strong>حسب المشروع</strong></div>
+      <div class="extra-item"><span>إدارة TikTok</span><strong>إضافة شهرية</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TERMS -->
+<section>
+  <div style="text-align:center" class="reveal">
+    <span class="section-label">الشروط</span>
+    <h2 class="section-title">ملاحظات مهمة</h2>
+  </div>
+
+  <div class="terms-grid">
+    <div class="term-card reveal">
+      <h4>📋 شروط التعاقد</h4>
+      <p>يتم توقيع عقد رسمي قبل بدء العمل يحدد نطاق الخدمات والمخرجات المتوقعة بشكل واضح ودقيق.</p>
+    </div>
+    <div class="term-card reveal">
+      <h4>💳 سياسة الدفع</h4>
+      <p>يتم دفع 50% مقدماً عند التعاقد أو بداية كل شهر، ثم 50% بعد 15 يوم (منتصف الشهر).</p>
+    </div>
+  </div>
+
+  <div class="term-notes reveal">
+    <ul>
+      <li>جميع الأسعار لا تشمل ضريبة القيمة المضافة ويتم إضافتها حسب النظام المعمول به.</li>
+      <li>التعديلات الإضافية خارج النطاق المتفق عليه تخضع لتسعير منفصل.</li>
+      <li>مدة التنفيذ تبدأ من تاريخ استلام المواد والمعلومات المطلوبة من العميل.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-label">تواصل معنا</span>
+      <h2 class="section-title">نتطلع للعمل معكم</h2>
+      <p class="section-desc">نتطلع لبناء شراكة ناجحة معكم. تواصلوا معنا اليوم وابدأوا رحلتكم نحو التميز الرقمي.</p>
+    </div>
+
+    <div class="contact-cards reveal">
+      <div class="contact-card">
+        <div class="icon">📞</div>
+        <strong>هاتف</strong>
+        <a href="tel:01555911374">01555911374</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">✉️</div>
+        <strong>البريد الإلكتروني</strong>
+        <a href="mailto:abdelfattahhassan850@gmail.com">abdelfattahhassan850@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <strong>العنوان</strong>
+        <span>الفيوم - 27 حي الجون، شارع أبو بكر</span>
+      </div>
+    </div>
+
+    <div class="contact-cta-wrap reveal">
+      <a href="tel:01555911374" class="btn-primary">📞 اتصل بنا الآن</a>
+      <a href="mailto:abdelfattahhassan850@gmail.com" class="btn-outline">✉️ راسلنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MEDIA <span>MARKET</span></div>
+  <p>© 2025 Media Market — جميع الحقوق محفوظة</p>
+  <p style="font-size:0.78rem">شريكك في التسويق الرقمي 🚀</p>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx - 18) * 0.12;
+  ry += (my - ry - 18) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .service-card, .price-card, .value-item, .why-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.transform = 'scale(1.5)';
+    ring.style.opacity = '0.8';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+    ring.style.opacity = '0.5';
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    nav.style.padding = '12px 60px';
+    nav.style.background = 'rgba(6, 30, 37, 0.97)';
+  } else {
+    nav.style.padding = '18px 60px';
+    nav.style.background = 'rgba(6, 30, 37, 0.85)';
+  }
+});
+</script>
+</body>
+</html>
